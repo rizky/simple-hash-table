@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:23:53 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/06/04 16:11:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:28:25 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,13 @@ void
 	item->data = data;
 	item->key = (char*)malloc(sizeof(char) * (strlen(key) + 1));
 	strcpy(item->key, key);
-
 	hash_index = hash_code_str(key);
 	while (g_hash_array[hash_index] != NULL &&
-		g_hash_array[hash_index]->key != NULL)
+		strcmp(g_hash_array[hash_index]->key, item->key) != 0)
 	{
-		++hash_index;
+		hash_index++;
 		hash_index %= SIZE;
 	}
-
 	g_hash_array[hash_index] = item;
 }
 
@@ -129,7 +127,8 @@ int
 	insert("how", 70);
 	insert("are", 80);
 	insert("you", 25);
-	insert("you", 25);
+	insert("you", 29);
+	insert("you1", 29);
 
 	display();
 	item = search("O");
