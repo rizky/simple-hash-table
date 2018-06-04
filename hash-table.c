@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:23:53 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/06/04 16:01:20 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:03:52 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_data_item
 
 } t_data_item;
 
-t_data_item		*hash_array[SIZE];
+t_data_item		*g_hash_array[SIZE];
 
 int
 	hash_code_str(char *key)
@@ -48,10 +48,10 @@ t_data_item
 	int	hash_index;
 
 	hash_index = hash_code_str(key);
-	while (hash_array[hash_index] != NULL)
+	while (g_hash_array[hash_index] != NULL)
 	{
-		if (strcmp(hash_array[hash_index]->key, key) == 0)
-			return (hash_array[hash_index]);
+		if (strcmp(g_hash_array[hash_index]->key, key) == 0)
+			return (g_hash_array[hash_index]);
 		hash_index++;
 		hash_index %= SIZE;
 	}
@@ -70,14 +70,14 @@ void
 	strcpy(item->key, key);
 
 	hash_index = hash_code_str(key);
-	while (hash_array[hash_index] != NULL &&
-		hash_array[hash_index]->key != NULL)
+	while (g_hash_array[hash_index] != NULL &&
+		g_hash_array[hash_index]->key != NULL)
 	{
 		++hash_index;
 		hash_index %= SIZE;
 	}
 
-	hash_array[hash_index] = item;
+	g_hash_array[hash_index] = item;
 }
 
 t_data_item
@@ -88,12 +88,12 @@ t_data_item
 	t_data_item	*temp;
 
 	hash_index = hash_code_str(item->key);
-	while (hash_array[hash_index] != NULL)
+	while (g_hash_array[hash_index] != NULL)
 	{
-		if (strcmp(hash_array[hash_index]->key, item->key) == 0)
+		if (strcmp(g_hash_array[hash_index]->key, item->key) == 0)
 		{
-			temp = hash_array[hash_index];
-			hash_array[hash_index] = NULL;
+			temp = g_hash_array[hash_index];
+			g_hash_array[hash_index] = NULL;
 			return (temp);
 		}
 		hash_index++;
@@ -110,8 +110,8 @@ void
 	i = 0;
 	while (i < SIZE)
 	{
-		if (hash_array[i] != NULL)
-			printf(" (%s,%d)", hash_array[i]->key, hash_array[i]->data);
+		if (g_hash_array[i] != NULL)
+			printf(" (%s,%d)", g_hash_array[i]->key, g_hash_array[i]->data);
 		else
 			printf(" ~~ ");
 		i++;
