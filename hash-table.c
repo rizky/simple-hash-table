@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:23:53 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/06/04 15:51:37 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:01:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ t_data_item
 	int			key;
 	int			hash_index;
 	t_data_item	*temp;
-	t_data_item	*deleted_item;
-
-	deleted_item = (t_data_item*)malloc(sizeof(t_data_item));
-	deleted_item->data = -1;
-	deleted_item->key = NULL;
 
 	hash_index = hash_code_str(item->key);
 	while (hash_array[hash_index] != NULL)
@@ -149,5 +144,6 @@ int
 		printf("Element found: %d\n", item->data);
 	else
 		printf("Element not found\n");
+	display();
 	return (0);
 }
