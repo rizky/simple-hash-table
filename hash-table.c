@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:23:53 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/06/04 16:03:52 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:11:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct	s_data_item
 {
 	char	*key;
 	int		data;
-
 } t_data_item;
 
 t_data_item		*g_hash_array[SIZE];
@@ -87,6 +86,8 @@ t_data_item
 	int			hash_index;
 	t_data_item	*temp;
 
+	if (!item)
+		return (NULL);
 	hash_index = hash_code_str(item->key);
 	while (g_hash_array[hash_index] != NULL)
 	{
@@ -131,7 +132,7 @@ int
 	insert("you", 25);
 
 	display();
-	item = search("are");
+	item = search("O");
 	if (item != NULL)
 		printf("Element found: %s => %d\n", item->key, item->data);
 	else
